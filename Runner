@@ -1,1 +1,38 @@
 // stores data for each user
+// create different instance variables that change for each runner
+// instance variables we need: (St) name, (St) location, (int) account number, (boolean) dare status (completed), (int) rank for the week
+
+public class Runner(){
+    public String name;
+    public String location;
+    private static int prevAccountNum = 1000;
+    private int accountNumber;
+    public boolean status; // to be reset every week
+    public int rank; // to be reset every week
+    
+    public Runner(String name, String location){
+        this.name = name;
+        this.location = location;
+        status = false;
+        rank = 0;
+        dayCount = 0;
+        accountNumber= prevAccountNum + 1;
+        prevAccountNum++;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public String getLocation(){
+        return location;
+    }
+    
+    public boolean getStatus(){
+        return status;
+    }
+    
+    public int getRank(){
+        return rank;
+    }
+}
