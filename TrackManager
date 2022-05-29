@@ -27,9 +27,9 @@ public class TrackManager {
         displayChallenge();
         // runs until everyone in the group completes the challenge
         while (group.getStatus() == false) {
+            showBoard();
             updateLap();
             verifySubmissions();
-            
         }
         displayEndResults();
     }
@@ -145,11 +145,19 @@ public class TrackManager {
             }
 
         }
-
     }
 
     private void displayEndResults() {
         updateLap();
         System.out.println("\nCongrats on finishing the race runners! We'll see you next week.");
-    }    
+    }
+    
+    private void showBoard() {
+        System.out.println("=========={}=======");
+        System.out.println("||               ||");
+        System.out.println("||               ||");
+        System.out.println("||               ||");
+        System.out.println("||               ||");
+        System.out.println("==================");
+    }
 }
