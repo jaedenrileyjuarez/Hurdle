@@ -26,10 +26,10 @@ public class TrackManager {
         group.updateRunners(allRunners);
         displayChallenge();
         // runs until everyone in the group completes the challenge
-        while (group.getStatus() == false && !isLapOver()) {
+        while (group.getStatus() == false) {
             updateLap();
             verifySubmissions();
-            isLapOver();
+            
         }
         displayEndResults();
     }
@@ -44,16 +44,18 @@ public class TrackManager {
             System.out.println("\n***The Hurdle Handbook***");
             System.out.println(
                     "\nHere's the hoe-down. At a random point during the week, Hurdle will\n alert "
-                    + "all runners across the globe about the start of a new race. \nThe goal of every"
-                    + "runner is to finish the race as fast as possible. \nHowever, there is one thing"
-                    + "standing in the way... a hurdle!");
-            System.out.println("\nTo hop the hurdle, runners must document their completion of the \n"
-                    + "challenge with a photo and fellow competitors will verify. Each \ntime a runner"
-                    + "hops a hurdle, the runner with contribute a rule to \nincrease the difficulty "
-                    + "of completing the initial challenge. As \nrules are added, the hurdle's height"
-                    + "increases for the remaining \ncompetitors.");
-            System.out.println("\nOnce all runners finish the race, rest up, drink some water, and \nstretch "
-                    + "before gearing up for next week's race.");
+                            + "all runners across the globe about the start of a new race. \nThe goal of every"
+                            + "runner is to finish the race as fast as possible. \nHowever, there is one thing"
+                            + "standing in the way... a hurdle!");
+            System.out
+                    .println("\nTo hop the hurdle, runners must document their completion of the \n"
+                            + "challenge with a photo and fellow competitors will verify. Each \ntime a runner"
+                            + "hops a hurdle, the runner with contribute a rule to \nincrease the difficulty "
+                            + "of completing the initial challenge. As \nrules are added, the hurdle's height"
+                            + "increases for the remaining \ncompetitors.");
+            System.out.println(
+                    "\nOnce all runners finish the race, rest up, drink some water, and \nstretch "
+                            + "before gearing up for next week's race.");
             System.out.print("\nPress any key to continue to the track: ");
             input.nextLine();
         }
@@ -90,12 +92,12 @@ public class TrackManager {
     }
 
     private void updateLap() {
-        if (isLapOver()) {
-            System.out.println("***Final Board***");
+        if (group.getStatus() == true) {
+            System.out.println("\n***Final Board***");
         } else {
-            System.out.println("***Current Board***");
+            System.out.println("\n***Current Board***");
         }
-        System.out.println("\nHeight of hurdle: " + nextAvailableRank);
+        System.out.println("Height of hurdle: " + nextAvailableRank);
         System.out.println("Runners finished: " + (nextAvailableRank - 1));
         System.out.println("Current rules: " + rules.toString());
     }
@@ -133,20 +135,21 @@ public class TrackManager {
             nextAvailableRank++;
             System.out.println(
                     "\nCongratulations " + nextPlace.getName() + "! You hopped the hurdle!");
-            System.out.print(
-                    "Your final ranking is #" + nextPlace.getRank() + ". Please add your rule: ");
-            String newRule = input.nextLine();
-            rules.add(newRule);
+            if (rules.size() < allRunners.size() - 1) {
+                System.out.print("Your final ranking is #" + nextPlace.getRank()
+                        + ". Please add your rule: ");
+                String newRule = input.nextLine();
+                rules.add(newRule);
+            } else {
+                group.changeStatus();
+            }
+
         }
 
-    }
-
-    private boolean isLapOver() {
-        return rules.size() == allRunners.size() - 1;
     }
 
     private void displayEndResults() {
         updateLap();
         System.out.println("\nCongrats on finishing the race runners! We'll see you next week.");
-    }
+    }    
 }
