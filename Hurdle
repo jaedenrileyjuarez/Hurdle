@@ -1,0 +1,37 @@
+// Holds the information for each challenge
+// Instance variables we need: (String) hurlde, (String) rules
+
+public class Hurdle{ 
+    public static final PEOPLE_PER_GROUP;
+    private Map<String, ArrayList<String>> groups;
+    private String hurdle;
+    private ArrayList<String> rules;
+    private int doneCounter;
+    ArrayList<String> names;
+    
+    public Hurdle(HashMap<> groups, String group) {
+        rules = new ArrayList<String>();
+        this.groups = groups;
+        names = groups.get(group);
+    }
+    
+    public void toString() {
+        System.out.println("Group members: " + names.toString());
+    }
+    
+    public boolean allDone(){
+        return doneCounter == PEOPLE_PER_GROUP;
+    }
+    
+    public void updateRules(){
+        for (String name: names){
+            if (name.getRank() == doneCounter + 1){
+                doneCounter++;
+                System.out.print("Hey runner, you have been ranked #" + name.getRank() + ". Please add your rule below.");
+    	          String newRule = key.nextLine();
+                rules.add(newRule);
+            }
+        }
+    }
+
+}
